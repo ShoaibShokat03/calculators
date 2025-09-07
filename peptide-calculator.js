@@ -63,7 +63,7 @@ class PeptideCalculator {
   max-width: 420px;
   width: auto;
   padding: 20px;
-  background: #e0e0e0; /* Light gray background */
+  background: #9e9d9dff; /* Light gray background */
   border: 1px solid #ffae00ff; /* Orange frame */
   border-radius: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
