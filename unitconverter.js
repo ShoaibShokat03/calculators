@@ -25,162 +25,167 @@ class UnitConverter {
         const css = `
                 #devatstack-unit-converter {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
-    // background: linear-gradient(135deg, #606060 0%, #303030 100%);
-    min-height: 100vh;
+    background: #2f2f2f;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
+
 .devatstack-unit-converter {
-    max-width: 450px;
-    width: 100%;
-    padding: 25px;
-    background: linear-gradient(135deg, #606060 0%, #303030 100%);
-    border-radius: 15px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #f0f0f0;
-    border:1px solid #f0f0f0;
-    // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    background: #2f2f2f;
+    border-radius: 10px;
 }
+
 .devatstack-converter-title {
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 8px;
-    color: #f0f0f0;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
 }
+
 .devatstack-converter-subtitle {
-    font-size: 1rem;
-    margin-bottom: 25px;
-    color: rgba(240, 240, 240, 0.9);
-    font-weight: 400;
-}
-.devatstack-input-section {
-    margin-bottom: 25px;
-}
-.devatstack-value-label {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 0.9rem;
     margin-bottom: 15px;
-    color: #f0f0f0;
+    color: #cccccc;
+    text-align: center;
 }
+
+.devatstack-input-section {
+    margin-bottom: 15px;
+}
+
+.devatstack-value-label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
 .devatstack-input-row {
     display: flex;
-    gap: 0;
-    margin-bottom: 20px;
+    gap: 5px;
+    margin-bottom: 10px;
 }
+
 .devatstack-value-input {
     flex: 1;
-    padding: 15px 20px;
-    background: rgba(48, 48, 48, 0.2);
+    padding: 10px;
+    background: #3f3f3f;
     border: none;
-    color: #f0f0f0;
-    font-size: 1.4rem;
-    font-weight: 600;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
     text-align: center;
-    border-radius: 25px 0 0 25px;
     outline: none;
 }
+
 .devatstack-value-input::placeholder {
-    color: rgba(240, 240, 240, 0.6);
+    color: #999999;
 }
+
 .devatstack-unit-dropdown {
     position: relative;
     display: inline-block;
 }
+
 .devatstack-unit-select {
-    padding: 15px 20px;
-    background: rgba(48, 48, 48, 0.3);
+    padding: 10px;
+    background: #3f3f3f;
     border: none;
-    color: #f0f0f0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-radius: 0 25px 25px 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
     cursor: pointer;
     outline: none;
-    min-width: 80px;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 35px;
+    background-position: right 10px center;
+    padding-right: 30px;
 }
+
 .devatstack-action-buttons {
     display: flex;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
+
 .devatstack-btn {
     flex: 1;
-    padding: 12px 20px;
-    border-radius: 25px;
+    padding: 10px;
+    border-radius: 5px;
     border: none;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    transition: background 0.2s;
 }
+
 .devatstack-btn-convert {
-    background: #f0f0f0;
-    color: #303030;
+    background: #ffffff;
+    color: #2f2f2f;
 }
+
 .devatstack-btn-convert:hover {
-    background: #d0d0d0;
-    transform: translateY(-1px);
+    background: #e0e0e0;
 }
+
 .devatstack-btn-clear {
-    background: rgba(240, 240, 240, 0.2);
-    color: #f0f0f0;
-    border: 1px solid rgba(240, 240, 240, 0.3);
+    background: #4f4f4f;
+    color: #ffffff;
 }
+
 .devatstack-btn-clear:hover {
-    background: rgba(240, 240, 240, 0.3);
-    transform: translateY(-1px);
+    background: #666666;
 }
+
 .devatstack-results {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
+
 .devatstack-result-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(48, 48, 48, 0.2);
-    padding: 15px 20px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
+    background: #3f3f3f;
+    padding: 10px;
+    border-radius: 5px;
 }
+
 .devatstack-result-label {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    color: rgba(240, 240, 240, 0.9);
+    color: #cccccc;
 }
+
 .devatstack-result-value {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 5px;
 }
+
 .devatstack-result-number {
-    background: rgba(48, 48, 48, 0.3);
-    padding: 12px 18px;
-    border-radius: 20px 0 0 20px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #f0f0f0;
-    min-width: 100px;
-    text-align: center;
-}
-.devatstack-result-unit {
-    background: rgba(48, 48, 48, 0.4);
-    padding: 12px 15px;
-    border-radius: 0 20px 20px 0;
+    background: #4f4f4f;
+    padding: 8px 12px;
+    border-radius: 5px;
     font-size: 1rem;
     font-weight: 500;
-    color: #f0f0f0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.devatstack-result-unit {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
 }
                 `;
 
@@ -195,7 +200,7 @@ class UnitConverter {
 
         // Title
         const title = this._elem(
-            "h1",
+            "h2",
             "devatstack-converter-title",
             "Unit Converter"
         );
