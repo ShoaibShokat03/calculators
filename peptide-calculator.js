@@ -65,10 +65,10 @@ class PeptideCalculator {
   width: auto;
   padding: 20px;
   background: linear-gradient(180deg, #ffeb99 0%, #ffd54f 100%);
-  border: 1px solid #e6b800;
+  border: 1px solid #ffae00ff;
   border-radius: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #b38f00;
+  color: #ffae00ff;
 }
 .devatstack-main-form { display: flex; flex-direction: column; gap: 20px; }
 .devatstack-text-line { display: flex; gap: 8px; align-items: center; font-size: 0.9rem; }
@@ -94,13 +94,13 @@ class PeptideCalculator {
 .devatstack-peptides-container { display: flex; flex-direction: column; gap: 15px; }
 .devatstack-peptide-item { background-color: rgba(255, 197, 0, 0.2); padding: 15px; border-radius: 8px; border: 1px solid #b38f00; }
 .devatstack-peptide-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-.devatstack-peptide-header h3 { margin: 0; font-size: 1.1rem; color: #e6b800; }
+.devatstack-peptide-header h3 { margin: 0; font-size: 1.1rem; color: #ffae00ff; }
 .devatstack-peptide-controls { display: flex; gap: 10px; }
-.devatstack-btn-icon { background: #e6b800; border: 1px solid #b38f00; border-radius: 6px; padding: 8px; cursor: pointer; color: #ffeb99; transition: all 0.2s; }
+.devatstack-btn-icon { background: #ffae00ff; border: 1px solid #b38f00; border-radius: 6px; padding: 8px; cursor: pointer; color: #ffeb99; transition: all 0.2s; }
 .devatstack-btn-icon:hover { background: #ffc500; }
 .devatstack-btn-add { background: #ffc500; }
-.devatstack-btn-add:hover { background: #e6b800; }
-.devatstack-btn-remove { background: #b38f00; border-color: #e6b800; }
+.devatstack-btn-add:hover { background: #ffae00ff; }
+.devatstack-btn-remove { background: #b38f00; border-color: #ffae00ff; }
 .devatstack-btn-remove:hover { background: #ffd54f; }
 .devatstack-peptide-inputs { display: flex; flex-direction: column; gap: 15px; }
 .devatstack-results-container { margin-top: 25px; border-top: 1px solid #b38f00; padding-top: 20px; }
@@ -110,7 +110,7 @@ class PeptideCalculator {
 .devatstack-formulate-header p { font-weight: bold; font-size: 1.5rem; margin: 0; }
 .devatstack-formulate-scale { border: 1px solid #b38f00; width: 100%; max-width: 400px; height: 60px; background-color: #ffeb99; position: relative; border-radius: 5px; }
 .devatstack-formulate-value-bar-box { width: 100%; height: 100%; position: absolute; z-index: 1; overflow: hidden; border-radius: 5px; }
-.devatstack-formulate-value-bar { height: 100%; background-color: #e6b800; transition: width 0.3s ease-in-out; }
+.devatstack-formulate-value-bar { height: 100%; background-color: #ffae00ff; transition: width 0.3s ease-in-out; }
 .devatstack-formulate-bars { margin-left: -5px; width: 100%; height: 100%; display: flex; position: absolute; z-index: 2; padding: 0 1px; box-sizing: border-box; }
 .devatstack-unit-box { height: 100%; display: flex; }
 .devatstack-formulate-bar { width: calc(100% / 5); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative; }
@@ -120,7 +120,7 @@ class PeptideCalculator {
 .devatstack-output-box { margin-top: 20px; }
 .devatstack-output-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .devatstack-output-list li { font-size: 1rem; color: #b38f00; background-color: rgba(255, 235, 153, 0.7); padding: 10px; border-radius: 6px; }
-.devatstack-output-list li::before { content: '•'; color: #e6b800; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }`;
+.devatstack-output-list li::before { content: '•'; color: #ffae00ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }`;
         const style = document.createElement("style");
         style.textContent = css;
         document.head.appendChild(style);
