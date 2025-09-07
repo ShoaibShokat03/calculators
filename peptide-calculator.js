@@ -118,14 +118,16 @@ class PeptideCalculator {
   width: 100%; max-width: 400px; height: 60px; background-color: #e0e0e0; /* Light gray background */
   position: relative; border-radius: 5px; }
 .devatstack-formulate-value-bar-box { width: 100%; height: 100%; position: absolute; z-index: 1; overflow: hidden; border-radius: 5px; }
-.devatstack-formulate-value-bar { height: 100%; background-color: #b3b3b3; /* Gray bar */
+.devatstack-formulate-value-bar { height: 100%; background-color: #b3b3b3; /* Medium gray filled bar */
+  width: 40%; /* 10 units out of 25 = 40% */
   transition: width 0.3s ease-in-out; }
 .devatstack-formulate-bars { margin-left: -5px; width: 100%; height: 100%; display: flex; position: absolute; z-index: 2; padding: 0 1px; box-sizing: border-box; }
 .devatstack-unit-box { height: 100%; display: flex; }
-.devatstack-formulate-bar { width: calc(100% / 5); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative; }
-.devatstack-bar-line-full { width: 2px; height: 45%; background-color: #666666; /* Darker gray line */
+.devatstack-formulate-bar { width: calc(100% / 25); /* 25 units total */
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative; }
+.devatstack-bar-line-full { width: 2px; height: 45%; background-color: #666666; /* Darker gray line for major ticks */
   border-radius: 1px; }
-.devatstack-bar-line-small { width: 1px; height: 20%; background-color: #999999; /* Medium gray line */ }
+.devatstack-bar-line-small { width: 1px; height: 20%; background-color: #999999; /* Medium gray line for minor ticks */ }
 .devatstack-line-value { font-size: 0.8rem; font-weight: 500; color: #333333; /* Dark gray text */
   margin-bottom: 4px; }
 .devatstack-output-box { margin-top: 20px; }
@@ -134,7 +136,24 @@ class PeptideCalculator {
   background-color: #d9d9d9; /* Gray background */
   padding: 10px; border-radius: 6px; }
 .devatstack-output-list li::before { content: '•'; color: #ffae00ff; /* Orange bullet */
-  font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }`;
+  font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+/* Style for the first and last labels */
+.devatstack-formulate-bar:first-child .devatstack-line-value,
+.devatstack-formulate-bar:nth-child(5n):not(:first-child) .devatstack-line-value {
+  display: block; /* Show labels at 0, 5, 10, etc. */
+}
+
+/* Hide other labels */
+.devatstack-formulate-bar .devatstack-line-value {
+  display: none;
+}
+
+/* Custom label for 10 */
+.devatstack-formulate-bar:nth-child(11) .devatstack-line-value {
+  display: block;
+  content: "10";
+}`;
         const style = document.createElement("style");
         style.textContent = css;
         document.head.appendChild(style);
