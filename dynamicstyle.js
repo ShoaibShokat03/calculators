@@ -130,6 +130,11 @@
         moveIconLinksToHeader(menu, header);
         setupToggle(header, menu);
         setupCompactOnScroll(header);
+        header.style.width="100%";
+        header.style.padding="0px";
+        header.style.margin="0px";
+        header.style.display="flex";
+        header.style.justifyContent="space-between";
     }
 
     if (document.readyState === "loading") {
