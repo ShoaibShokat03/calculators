@@ -116,7 +116,7 @@ class PeptideCalculator {
       .devatstack-formulate-value-bar { height: 100%; background-color: #808080; transition: width 0.3s ease-in-out; }
       .devatstack-formulate-bars { margin-left: -5px; width: 100%; height: 100%; display: flex; position: absolute; z-index: 2; padding: 0 1px; box-sizing: border-box; overflow: hidden; }
       .devatstack-unit-box { height: 100%; display: flex; }
-      .devatstack-formulate-bar { width: calc(100% / 5); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative; }
+      .devatstack-formulate-bar { width: calc(100% / 5); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative;flex-wrap:nowrap;text-wrap:nowrap; }
       .devatstack-bar-line-full { width: 2px; height: 45%; background-color: #f0f0f0; border-radius: 1px; }
       .devatstack-bar-line-small { width: 1px; height: 20%; background-color: rgba(240,240,240,0.7); }
       .devatstack-line-value { font-size: 0.8rem; font-weight: 500; color: #f0f0f0; margin-bottom: 4px; }
