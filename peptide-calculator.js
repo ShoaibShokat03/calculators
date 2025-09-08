@@ -114,14 +114,17 @@ class PeptideCalculator {
       }
       .devatstack-formulate-value-bar-box { width: 100%; height: 100%; position: absolute; z-index: 1; overflow: hidden; border-radius: 5px; }
       .devatstack-formulate-value-bar { height: 100%; background-color: #808080; transition: width 0.3s ease-in-out; }
-      .devatstack-formulate-bars { margin-left: -5px; width: 100%; height: 100%; display: flex; position: absolute; z-index: 2; padding: 0 1px; box-sizing: border-box; }
+      .devatstack-formulate-bars { margin-left: -5px; width: 100%; height: 100%; display: flex; position: absolute; z-index: 2; padding: 0 1px; box-sizing: border-box; overflow: hidden; }
       .devatstack-unit-box { height: 100%; display: flex; }
       .devatstack-formulate-bar { width: calc(100% / 5); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; position: relative; }
       .devatstack-bar-line-full { width: 2px; height: 45%; background-color: #f0f0f0; border-radius: 1px; }
       .devatstack-bar-line-small { width: 1px; height: 20%; background-color: rgba(240,240,240,0.7); }
       .devatstack-line-value { font-size: 0.8rem; font-weight: 500; color: #f0f0f0; margin-bottom: 4px; }
+      .devatstack-line-value-left { position: absolute; bottom: 4px; left: 0; text-align: left; font-size: 0.8rem; font-weight: 500; color: #f0f0f0; white-space: nowrap; pointer-events: none; }
+      .devatstack-line-value-right { position: absolute; bottom: 4px; right: 0; text-align: right; font-size: 0.8rem; font-weight: 500; color: #f0f0f0; white-space: nowrap; pointer-events: none; }
       /* Smaller tick labels for large scales (>= 1000 units) */
       .devatstack-scale-large .devatstack-line-value { font-size: 0.65rem; }
+      .devatstack-scale-large .devatstack-line-value-left, .devatstack-scale-large .devatstack-line-value-right { font-size: 0.65rem; }
       .devatstack-output-box { margin-top: 20px; }
       .devatstack-output-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
       .devatstack-output-list li { font-size: 1rem; color: #f0f0f0; background-color: rgba(48, 48, 48, 0.8); padding: 10px; border-radius: 6px; }
@@ -493,29 +496,36 @@ class PeptideCalculator {
         for (let i = 0; i < scaleDivide; i++) {
             const unitBox = this._elem("div", "devatstack-unit-box");
             unitBox.style.width = `${100 / scaleDivide}%`;
+            unitBox.style.position = "relative";
             formulateBars.appendChild(unitBox);
+
+            // five ticks inside each segment (1 full + 4 small)
             for (let j = 0; j < 5; j++) {
                 const formulateBar = this._elem("div", "devatstack-formulate-bar");
                 const barLine = this._elem("div", `${j === 0 ? "devatstack-bar-line-full" : "devatstack-bar-line-small"}`);
                 formulateBar.appendChild(barLine);
-                if (j === 0) {
-                    const barValue = this._elem("div", "devatstack-line-value", showVal);
-                    formulateBar.appendChild(barValue);
-                    showVal += valueGap;
-                }
                 unitBox.appendChild(formulateBar);
             }
+            // left-aligned label at the start of each segment
+            const labelLeft = this._elem("div", "devatstack-line-value-left", showVal.toLocaleString());
+            unitBox.appendChild(labelLeft);
+            // also place a right-aligned final label inside the last segment
+            if (i === scaleDivide - 1) {
+                const rightLabel = this._elem("div", "devatstack-line-value-right", formData.scaleUnits.toLocaleString());
+                unitBox.appendChild(rightLabel);
+            }
+            showVal += valueGap;
         }
+        // Add final closing tick (no label here; the label is in the last segment)
         const unitBox = this._elem("div", "devatstack-unit-box");
         unitBox.style.width = `fit-content`;
         unitBox.style.position = `absolute`;
-        unitBox.style.right = `-20px`;
+        unitBox.style.right = `0`;
+        unitBox.style.zIndex = `1`;
         formulateBars.appendChild(unitBox);
         const formulateBar = this._elem("div", "devatstack-formulate-bar");
         const barLine = this._elem("div", "devatstack-bar-line-full");
         formulateBar.appendChild(barLine);
-        const barValue = this._elem("div", "devatstack-line-value", showVal);
-        formulateBar.appendChild(barValue);
         unitBox.appendChild(formulateBar);
 
         // Output instructions
