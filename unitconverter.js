@@ -28,16 +28,17 @@ class UnitConverter {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background: #2f2f2f;
-    border-radius: 10px;
+    background: linear-gradient(145deg, #606060 0%, #303030 100%);
+    border-radius: 12px;
     font-family: Arial, sans-serif;
     color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #DAA520;
+    box-shadow: none;
 }
 
 .devatstack-unit-converter {
     padding: 15px;
-    background: #2f2f2f;
+    background: transparent;
     border-radius: 10px;
 }
 
@@ -76,9 +77,9 @@ class UnitConverter {
 .devatstack-value-input {
     flex: 1;
     padding: 10px;
-    background: #3f3f3f;
-    border: none;
-    border-radius: 5px;
+    background: #202020;
+    border: 1px solid #DAA520;
+    border-radius: 8px;
     color: #ffffff;
     font-size: 1rem;
     text-align: center;
@@ -96,9 +97,9 @@ class UnitConverter {
 
 .devatstack-unit-select {
     padding: 10px;
-    background: #3f3f3f;
-    border: none;
-    border-radius: 5px;
+    background: #202020;
+    border: 1px solid #DAA520;
+    border-radius: 8px;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
@@ -128,21 +129,23 @@ class UnitConverter {
 }
 
 .devatstack-btn-convert {
-    background: #ffffff;
-    color: #2f2f2f;
+    background: #808080;
+    color: #ffffff;
+    border: 1px solid #DAA520;
 }
 
 .devatstack-btn-convert:hover {
-    background: #e0e0e0;
+    background: #606060;
 }
 
 .devatstack-btn-clear {
-    background: #4f4f4f;
+    background: #505050;
     color: #ffffff;
+    border: 1px solid #DAA520;
 }
 
 .devatstack-btn-clear:hover {
-    background: #666666;
+    background: #404040;
 }
 
 .devatstack-results {
@@ -155,9 +158,10 @@ class UnitConverter {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #3f3f3f;
+    background: rgba(48, 48, 48, 0.8);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 1px solid #DAA520;
 }
 
 .devatstack-result-label {
@@ -175,11 +179,19 @@ class UnitConverter {
 .devatstack-result-number {
     background: #4f4f4f;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 500;
     color: #ffffff;
     text-align: center;
+}
+/* Gold focus outlines */
+.devatstack-value-input:focus,
+.devatstack-unit-select:focus,
+.devatstack-btn:focus {
+    outline: 2px solid #DAA520;
+    outline-offset: 2px;
+    border-color: #DAA520;
 }
 
 .devatstack-result-unit {
