@@ -59,6 +59,14 @@
 
 /* Accessibility */
 .jw-menu-link:focus { outline: 2px solid ${GOLD}; outline-offset: 2px; border-color: ${GOLD}; }
+.header{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
 `;
         const style = document.createElement("style");
         style.setAttribute("data-dynamic-style", "true");
