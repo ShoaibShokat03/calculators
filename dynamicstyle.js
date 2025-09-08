@@ -1,13 +1,13 @@
 // Dynamic theme and behavior for site header/navigation
 (function () {
-    if (typeof window === "undefined" || typeof document === "undefined") return;
+  if (typeof window === "undefined" || typeof document === "undefined") return;
 
-    const GOLD = "#DAA520";
-    const DARK_BG_GRADIENT = "linear-gradient(145deg, #606060 0%, #303030 100%)";
-    const DARK_BG_SOLID = "#303030";
+  const GOLD = "#DAA520";
+  const DARK_BG_GRADIENT = "linear-gradient(145deg, #606060 0%, #303030 100%)";
+  const DARK_BG_SOLID = "#303030";
 
-    function injectStyle() {
-        const css = `
+  function injectStyle() {
+    const css = `
 /* Container */
 .header-wrap__inner { position: sticky; top: 0; z-index: 1000; background: ${DARK_BG_GRADIENT}; }
 .header { max-width: 1200px; margin: 0 auto; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -67,89 +67,99 @@
     justify-content: space-between;
     align-items:center;
 }
+    .jw-menu>.jw-menu-item>.jw-menu-link {
+    border: 2px solid transparent;
+    border-radius: 2px;
+    font-size: 1rem;
+}
 `;
-        const style = document.createElement("style");
-        style.setAttribute("data-dynamic-style", "true");
-        style.textContent = css;
-        document.head.appendChild(style);
+    const style = document.createElement("style");
+    style.setAttribute("data-dynamic-style", "true");
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function ensureBurgerButton(headerEl) {
+    let burger = headerEl.querySelector(".jw-burger");
+    if (burger) return burger;
+    burger = document.createElement("button");
+    burger.className = "jw-burger";
+    burger.setAttribute("aria-label", "Toggle navigation");
+    burger.setAttribute("aria-expanded", "false");
+    burger.innerHTML =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18M3 12h18M3 18h18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>';
+    headerEl.appendChild(burger);
+    return burger;
+  }
+
+  function setupToggle(headerEl, menuEl) {
+    const burger = ensureBurgerButton(headerEl);
+    const toggle = () => {
+      const open = menuEl.classList.toggle("is-open");
+      burger.setAttribute("aria-expanded", String(open));
+    };
+    burger.addEventListener("click", toggle);
+  }
+
+  function moveIconLinksToHeader(menuEl, headerEl) {
+    // Create actions container if not present
+    let actions = headerEl.querySelector(".jw-header-actions");
+    if (!actions) {
+      actions = document.createElement("div");
+      actions.className = "jw-header-actions";
+      headerEl.appendChild(actions);
     }
 
-    function ensureBurgerButton(headerEl) {
-        let burger = headerEl.querySelector(".jw-burger");
-        if (burger) return burger;
-        burger = document.createElement("button");
-        burger.className = "jw-burger";
-        burger.setAttribute("aria-label", "Toggle navigation");
-        burger.setAttribute("aria-expanded", "false");
-        burger.innerHTML = "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 6h18M3 12h18M3 18h18\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>";
-        headerEl.appendChild(burger);
-        return burger;
-    }
+    const candidates = [];
+    menuEl.querySelectorAll("a.jw-menu-link--icon").forEach((a) => {
+      const li = a.closest("li.jw-menu-item");
+      if (li && !candidates.includes(li)) candidates.push(li);
+    });
+    menuEl
+      .querySelectorAll(
+        "li.jw-menu-item.js-menu-cart-item, li.jw-menu-item.jw-menu-wishlist-item"
+      )
+      .forEach((li) => {
+        if (li && !candidates.includes(li)) candidates.push(li);
+      });
 
-    function setupToggle(headerEl, menuEl) {
-        const burger = ensureBurgerButton(headerEl);
-        const toggle = () => {
-            const open = menuEl.classList.toggle("is-open");
-            burger.setAttribute("aria-expanded", String(open));
-        };
-        burger.addEventListener("click", toggle);
-    }
+    // Move them to actions container (keeps popovers functional)
+    candidates.forEach((li) => actions.appendChild(li));
+  }
 
-    function moveIconLinksToHeader(menuEl, headerEl) {
-        // Create actions container if not present
-        let actions = headerEl.querySelector(".jw-header-actions");
-        if (!actions) {
-            actions = document.createElement("div");
-            actions.className = "jw-header-actions";
-            headerEl.appendChild(actions);
-        }
+  function setupCompactOnScroll(headerEl) {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const compact = y > 10;
+      headerEl.classList.toggle("is-compact", compact);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
 
-        const candidates = [];
-        menuEl.querySelectorAll("a.jw-menu-link--icon").forEach(a => {
-            const li = a.closest("li.jw-menu-item");
-            if (li && !candidates.includes(li)) candidates.push(li);
-        });
-        menuEl.querySelectorAll("li.jw-menu-item.js-menu-cart-item, li.jw-menu-item.jw-menu-wishlist-item").forEach(li => {
-            if (li && !candidates.includes(li)) candidates.push(li);
-        });
+  function init() {
+    injectStyle();
+    const headerWrap = document.querySelector(".header-wrap__inner");
+    const header = document.querySelector(".header");
+    const menu = document.querySelector(
+      ".menu.jw-menu-copy .jw-menu-horizontal"
+    );
+    if (!headerWrap || !header || !menu) return;
+    moveIconLinksToHeader(menu, header);
+    setupToggle(header, menu);
+    setupCompactOnScroll(header);
+    header.style.width = "100%";
+    header.style.padding = "0px";
+    header.style.margin = "0px";
+    header.style.display = "flex";
+    header.style.justifyContent = "space-between";
+  }
 
-        // Move them to actions container (keeps popovers functional)
-        candidates.forEach(li => actions.appendChild(li));
-    }
-
-    function setupCompactOnScroll(headerEl) {
-        let lastY = window.scrollY;
-        const onScroll = () => {
-            const y = window.scrollY;
-            const compact = y > 10;
-            headerEl.classList.toggle("is-compact", compact);
-            lastY = y;
-        };
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
-    }
-
-    function init() {
-        injectStyle();
-        const headerWrap = document.querySelector(".header-wrap__inner");
-        const header = document.querySelector(".header");
-        const menu = document.querySelector(".menu.jw-menu-copy .jw-menu-horizontal");
-        if (!headerWrap || !header || !menu) return;
-        moveIconLinksToHeader(menu, header);
-        setupToggle(header, menu);
-        setupCompactOnScroll(header);
-        header.style.width="100%";
-        header.style.padding="0px";
-        header.style.margin="0px";
-        header.style.display="flex";
-        header.style.justifyContent="space-between";
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", init);
-    } else {
-        init();
-    }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();
-
-
